@@ -1,0 +1,232 @@
+{% load static %}
+<html lang="en">
+
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+    <title>Aqua.com</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<!--
+
+TemplateMo 546 Sixteen Clothing
+
+https://templatemo.com/tm-546-sixteen-clothing
+
+-->
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo-sixteen.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+
+  </head>
+
+  <body>
+
+    <!-- ***** Preloader Start ***** -->
+
+    <!-- ***** Preloader End ***** -->
+
+    <!-- Header -->
+    <header class="">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand" href="home"><h2>Aqua.<em>Com</em></h2></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="/">Home
+                  <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Cart</a>
+              </li>
+            </ul>
+          </div>
+
+          <form class="form-inline d-flex justify-content-center md-form form-sm active-pink active-pink-2 mt-2">
+         <i class="fas fa-search" aria-hidden="true"></i>
+         <input class="form-control form-control-sm ml-2 w-1" type="text" placeholder="Search"
+            aria-label="Search">
+        </form>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Page Content -->
+<!--Section: Block Content-->
+
+
+<div class="container px-3 my-5 clearfix">
+    <!-- Shopping cart table -->
+    <div class="card">
+        <div class="card-header">
+            <h2>Shopping Cart</h2>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered m-0">
+                <thead>
+                  <tr>
+                    <!-- Set columns width -->
+                    <th class="text-center py-3 px-4" style="min-width: 400px;">Product Name &amp; Details</th>
+                    <th class="text-right py-3 px-4" style="width: 100px;">Price</th>
+                    <th class="text-center py-3 px-4" style="width: 120px;">Quantity</th>
+                    <th class="text-right py-3 px-4" style="width: 100px;">Total</th>
+                    <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#" class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for i in ci %}
+                  <tr>
+
+                    <td class="p-4">
+                      <div class="media align-items-center">
+                       <a href="{{ i.prodt.get_url }}"> <img src="{{ i.prodt.img.url }}" class="d-block ui-w-40 ui-bordered mr-4" alt="{{ i.prodt.name }}"></a>
+                        <div class="media-body">
+                          <a href="{{ i.prodt.get_url }}" class="d-block text-dark">{{ i.prodt.name }}</a>
+                          <small>
+                            <span class="text-muted">ID:{{i.prodt.id }}</span>
+<!--                            <span class="text-muted">Qty:{{ i.quan }} </span>-->
+<!--                            <span class="text-muted">Ships from: </span> China-->
+                          </small>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="text-right font-weight-semibold align-middle p-4">{{ i.prodt.price }}</td>
+                    <td class="align-middle p-4"><input type="text" class="form-control text-center" value= "{{ i.quan }}"><a class="btn btn-danger" style="" href="{% url 'cart_decriment' i.prodt.id %}"> -</a><a class="btn btn-danger" style="" href="{% url 'addcart' i.prodt.id %}">+</a></td>
+                    <td class="text-right font-weight-semibold align-middle p-4">{{ i.total }}</td>
+                    <td class="text-center align-middle px-0"><a href="{% url 'remove' i.prodt.id %}" class="fa fa-trash" style="color:#ed2939;font-size:25px;" title="" data-original-title="Remove"></a></td>
+
+                  </tr>
+                {% endfor %}
+
+
+
+
+
+
+                </tbody>
+              </table>
+            </div>
+            <!-- / Shopping cart table -->
+
+            <div class="d-flex flex-wrap justify-content-between align-items-center pb-4">
+              <div class="mt-4">
+                <label class="text-muted font-weight-normal">Promocode</label>
+                <input type="text" placeholder="ABC" class="form-control">
+              </div>
+              <div class="d-flex">
+                <div class="text-right mt-4 mr-5">
+                  <label class="text-muted font-weight-normal m-0">Discount</label>
+                  <div class="text-large"><strong></strong></div>
+                </div>
+                <div class="text-right mt-4">
+                  <label class="text-muted font-weight-normal m-0">Total price</label>
+                  <div class="text-large"><strong>{{ t }}</strong></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="float-right">
+              <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3">Back to shopping</button>
+              <button type="button" class="btn btn-lg btn-primary mt-2">Checkout</button>
+            </div>
+
+          </div>
+      </div>
+  </div>
+
+
+<!--Section: Block Content-->
+
+
+
+
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="inner-content">
+              <p>Copyright &copy; 2020 Sixteen Clothing Co., Ltd.
+
+            - Design: <a rel="nofollow noopener" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <style type="text/css">
+body{
+    margin-top:20px;
+    background:#eee;
+}
+.ui-w-40 {
+    width: 40px !important;
+    height: auto;
+}
+
+.card{
+    box-shadow: 0 1px 15px 1px rgba(52,40,104,.08);
+}
+
+.ui-product-color {
+    display: inline-block;
+    overflow: hidden;
+    margin: .144em;
+    width: .875rem;
+    height: .875rem;
+    border-radius: 10rem;
+    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.15) inset;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.15) inset;
+    vertical-align: middle;
+}
+</style>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+
+    <!-- Additional Scripts -->
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+    <script src="{% static 'assets/js/owl.js' %}"></script>
+    <script src="{% static 'assets/js/slick.js' %}"></script>
+    <script src="{% static 'assets/js/isotope.js' %}"></script>
+    <script src="{% static 'assets/js/accordions.js' %}"></script>
+    <script type="text/javascript">
+
+</script>
+
+
+    <script language = "{% static 'text/Javascript' %}">
+
+      cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+      function clearField(t){                   //declaring the array outside of the
+      if(! cleared[t.id]){                      // function makes it static and global
+          cleared[t.id] = 1;  // you could use true and false, but that's more typing
+          t.value='';         // with more chance of typos
+          t.style.color='#fff';
+          }
+      }
+    </script>
+
+
+  </body>
+
+</html>
